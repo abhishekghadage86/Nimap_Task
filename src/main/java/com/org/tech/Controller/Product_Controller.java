@@ -67,7 +67,7 @@ public class Product_Controller {
 
 		boolean b = porser.DelProdById(cid);
 		if (b) {
-			return "Record \t" + cid + "\tdeleted Successfully.";
+			return "Record deleted Successfully.....!.";
 		} else {
 			return "Some Problem is there...";
 		}

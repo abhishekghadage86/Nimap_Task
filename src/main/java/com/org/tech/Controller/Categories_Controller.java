@@ -41,9 +41,9 @@ public class Categories_Controller {
 
 		boolean b = catserv.saveCat(c);
 		if (b) {
-			return "Category Added Successfully";
+			return "Category Added Successfully....!";
 		} else {
-			return "some problem is there.....";
+			return "some problem is there";
 		}
 	}
 
@@ -69,7 +69,7 @@ public class Categories_Controller {
 		boolean update=catserv.updateCategory(id, c);
 		if(update)
 		{
-			return ResponseEntity.ok("Category updated successfully");
+			return ResponseEntity.ok("Category updated successfully...............!");
 		}
 		else
 		{
@@ -84,9 +84,9 @@ public class Categories_Controller {
 
 		boolean b = catserv.DelCatById(cid);
 		if (b) {
-			return "Record \t" + cid + "\tdeleted Successfully.";
+			return "Record deleted Successfully.....!";
 		} else {
-			return "Some Problem is there...";
+			return "Some Problem is there";
 		}
 	}
 	
