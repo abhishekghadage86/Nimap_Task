@@ -1,4 +1,4 @@
-package com.org.alumini;
+package com.org.tech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
