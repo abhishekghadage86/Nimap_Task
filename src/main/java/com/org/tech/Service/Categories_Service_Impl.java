@@ -1,9 +1,11 @@
 package com.org.tech.Service;
 
-import java.util.List;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.org.tech.Model.Categories;
@@ -16,75 +18,58 @@ public class Categories_Service_Impl implements Categories_Service{
 	private Categories_Repo cr;
 
 	@Override
-	public boolean saveCat(Categories c) {
-		Categories c11 = cr.save(c);
-		return c11 != null;
-	}
-
-	@Override
-	public List<Categories> viewAllc() {
-		return cr.findAll();
-	}
-
-	@Override
-	public Categories viewbyid(int id) {
-		Optional<Categories> ic = cr.findById(id);
-		if (ic.isPresent()) {
-			return ic.get();
-		} else {
-			return null;
-		}
-	}
-
-	@Override
-	public Categories updatcat(Categories c) {
-		Optional<Categories> o = cr.findById(c.getId());
-		if (o.isPresent()) {
-			return o.get();
-		} else {
-			return null;
-		}
-	}
-
-	@Override
-	public boolean delcat(int id) {
-
-		Optional<Categories> r = cr.findById(id);
-		if (r.isPresent()) {
-			cr.deleteById(id);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public Page<Categories> getAllCategories(int page, int size) {
-		Pageable pagable=PageRequest.of(page, size);
-		return cr.findAll(pagable);
-	}
-
-	@Override
 	public Page<Categories> findAllCategories(int page, int size) {
-		// Pageable pagable=PageRequest.of(page, size);
-		return cr.findAll(pagable);
+		// TODO Auto-generated method stub
+		Page<Categories> categ=cr.findAll(PageRequest.of(page, size));
+		return categ;
+	}
+
+	@Override
+	public boolean saveCat(Categories c) {
+		// TODO Auto-generated method stub
+		Categories cat=cr.save(c);
+		return cat!= null ;
 	}
 
 	@Override
 	public Categories getCatbyId(int cid) {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<Categories> oc=cr.findById(cid);
+		if(oc.isPresent()) {
+			return oc.get();
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
 	public boolean DelCatById(int cid) {
 		// TODO Auto-generated method stub
+		Optional<Categories> oc = cr.findById(cid);
+		if(oc.isPresent()) {
+		cr.deleteById(cid);
+		return true;
+		}
+		else {
 		return false;
+	}
 	}
 
 	@Override
 	public boolean updateCategory(int id, Categories c) {
 		// TODO Auto-generated method stub
+		Optional<Categories>opcat=cr.findById(id);
+		if(opcat.isPresent())
+		{
+			Categories cat=opcat.get();
+			cat.setCname(c.getCname());
+			cr.save(cat);
+			return true;
+		}
+	
 		return false;
 	}
+
+	
 }

@@ -1,17 +1,21 @@
 package com.org.tech.Service;
 
-import java.util.List;
+
 
 import org.springframework.data.domain.Page;
+
 
 import com.org.tech.Model.Product;
 
 public interface Product_Service {
 
-	public Page getAllProducts(int page, int size);
-	boolean savepro(Product p);
-	List<Product> viewAllp();
-	Product viewpbyid(int id);
-	Product updatep(Product c);
-	boolean delp(int id);
+public Page<Product> findAllProds(int page,int size);
+	
+	public Product saveProd(Product p);
+	
+	Product getProdById(int pid);
+	
+	public boolean DelProdById(int pid);
+	
+	public Product UpdateProd(int pid,Product p);
 }
