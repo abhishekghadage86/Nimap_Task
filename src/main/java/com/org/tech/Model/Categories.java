@@ -18,10 +18,10 @@ import lombok.Data;
 public class Categories {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private int cid;
-	private String cname;
+	private int id;
+	private String name;
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 
 	 @JsonIgnoreProperties("category")
-    private List<Product> product;
+    private List<Products> products;
 }

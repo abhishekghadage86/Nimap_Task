@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.org.tech.Model.Categories;
-import com.org.tech.Model.Product;
+import com.org.tech.Model.Products;
 import com.org.tech.Repository.Product_Repo;
 
 @Service
@@ -21,30 +21,30 @@ public class Product_Service_Impl implements Product_Service{
 	@Autowired
 	Categories_Service categoriesService;
 	@Override
-	public Page<Product> findAllProds(int page, int size) {
+	public Page<Products> findAllProds(int page, int size) {
 		// TODO Auto-generated method stub
-		Page<Product> prod=pr.findAll(PageRequest.of(page, size));
+		Page<Products> prod=pr.findAll(PageRequest.of(page, size));
 		return prod;
 	}
 
 	@Override
-	public Product saveProd(Product p) {
+	public Products saveProd(Products p) {
 		// TODO Auto-generated method stub
-		int cid=p.getCategory().getCid();
+		int cid=p.getCategory().getId();
 		Categories cat=categoriesService.getCatbyId(cid);
 		if(cat==null) 
 			return null;
 		
 		p.setCategory(cat);
 		
-		Product pc=pr.save(p);
+		Products pc=pr.save(p);
 		return pc;
 	}
 
 	@Override
-	public Product getProdById(int pid) {
+	public Products getProdById(int pid) {
 		// TODO Auto-generated method stub
-		Optional<Product> op=pr.findById(pid);
+		Optional<Products> op=pr.findById(pid);
 		if(op.isPresent()) {
 			return op.get();
 		}
@@ -56,7 +56,7 @@ public class Product_Service_Impl implements Product_Service{
 	@Override
 	public boolean DelProdById(int pid) {
 		// TODO Auto-generated method stub
-		Optional<Product> oc = pr.findById(pid);
+		Optional<Products> oc = pr.findById(pid);
 		if(oc.isPresent()) {
 		pr.deleteById(pid);
 		return true;
@@ -67,16 +67,16 @@ public class Product_Service_Impl implements Product_Service{
 	}
 
 	@Override
-	public Product UpdateProd(int pid, Product p) {
+	public Products UpdateProd(int pid, Products p) {
 		// TODO Auto-generated method stub
-		Optional<Product> op = pr.findById(pid);
+		Optional<Products> op = pr.findById(pid);
 	    if (op.isPresent()) {
-	        Product prod = op.get();
+	        Products prod = op.get();
 	        prod.setPname(p.getPname());
 	        prod.setPrice(p.getPrice());
 
 	       
-	        int newcid = p.getCategory().getCid();
+	        int newcid = p.getCategory().getId();
 
 	    
 	        Categories newCat = categoriesService.getCatbyId(newcid);

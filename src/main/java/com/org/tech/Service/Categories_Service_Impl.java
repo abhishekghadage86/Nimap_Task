@@ -63,7 +63,7 @@ public class Categories_Service_Impl implements Categories_Service{
 		if(opcat.isPresent())
 		{
 			Categories cat=opcat.get();
-			cat.setCname(c.getCname());
+			cat.setName(c.getName());
 			cr.save(cat);
 			return true;
 		}

@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Product {
+public class Products {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Product {
 	private Double price;
 	
 	 @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)   
-	    @JoinColumn(name = "category_id", referencedColumnName = "cid")  
+	    @JoinColumn(name = "category_id", referencedColumnName = "id")  
 	   
 	  @JsonIgnoreProperties("product") 
 	    private Categories category; 

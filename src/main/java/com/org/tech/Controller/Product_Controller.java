@@ -1,5 +1,6 @@
 package com.org.tech.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.org.tech.Model.Product;
+import com.org.tech.Model.Products;
 import com.org.tech.Service.Product_Service;
 
 @RestController
 @RequestMapping("/api/products")
 public class Product_Controller {
-
+	@Autowired
 	Product_Service porser;
 	@GetMapping
-	public ResponseEntity<Page<Product>> getAllProds(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "5") int size){
+	public ResponseEntity<Page<Products>> getAllProds(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "5") int size){
 				
-		Page<Product> prods=porser.findAllProds(page, size);
+		Page<Products> prods=porser.findAllProds(page, size);
 		
 		return ResponseEntity.ok(prods);
 	}
@@ -32,21 +33,21 @@ public class Product_Controller {
 	
 
 	@PostMapping
-	public Product AddProd(@RequestBody Product p) {
+	public Products AddProd(@RequestBody Products p) {
 		return porser.saveProd(p);
 	}
 	
 	
 
 	@GetMapping(value="/{pid}")
-	public Product getProdById(@PathVariable int pid) {
+	public Products getProdById(@PathVariable int pid) {
 			
-			Product pr = porser.getProdById(pid);
+			Products pr = porser.getProdById(pid);
 			if(pr!=null) {
 				return pr;
 			}
 			else {
-				throw new RuntimeException("Product Not Found");
+				throw new RuntimeException("Products Not Found");
 			}
 	}
 	
@@ -54,7 +55,7 @@ public class Product_Controller {
 	
 
 	@PutMapping("/{pid}")
-	public Product UpdateProd(@PathVariable int pid,@RequestBody Product p)
+	public Products UpdateProd(@PathVariable int pid,@RequestBody Products p)
 	{
 		return porser.UpdateProd(pid,p);
 	}
